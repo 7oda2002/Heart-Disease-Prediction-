@@ -1,21 +1,19 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
-import os # مكتبة التعامل مع مسارات النظام
+import os
 
 app = Flask(__name__)
 
 # ==========================================================
-# إعداد المسارات الديناميكية (تشتغل على أي جهاز)
+# load the paths 
 # ==========================================================
 
-# تحديد مسار المجلد الحالي اللي فيه ملف app.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# تحديد مسار مجلد الموديلات (بنطلع خطوة لورا للمجلد الرئيسي ثم ندخل model)
+
 MODEL_DIR = os.path.join(BASE_DIR, "..", "model")
 
-# تحميل الملفات باستخدام المسار الديناميكي
 model = joblib.load(os.path.join(MODEL_DIR, "heart_model.pkl"))
 scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 columns = joblib.load(os.path.join(MODEL_DIR, "columns.pkl"))
